@@ -39,3 +39,20 @@ class OnlineFilter(object):
     def get_data(self, data):
         filted, self.z = signal.lfilter(self.b, self.a, [data], zi=self.z)
         return filted
+
+class OnlineFilter(object):
+
+    def __init__(self, cutoff, fs, order):
+        
+        nyq = 0.5 * fs
+        normal_cutoff = cutoff / nyq
+
+        # Get the filter coct_errorficients 
+        self.b, self.a = signal.butter(order, normal_cutoff, btype='low', analog=False)
+
+        # Initialize
+        self.z = signal.lfilter_zi(self.b, self.a)
+    
+    def get_data(self, data):
+        filted, self.z = signal.lfilter(self.b, self.a, [data], zi=self.z)
+        return filted

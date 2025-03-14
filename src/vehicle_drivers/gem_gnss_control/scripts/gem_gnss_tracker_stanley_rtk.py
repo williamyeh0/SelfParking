@@ -5,7 +5,7 @@
 # Description        : gnss waypoints tracker using pid and Stanley controller                                                              
 # Author             : Hang Cui (hangcui3@illinois.edu)                                       
 # Date created       : 08/08/2022                                                                 
-# Date last modified : 08/18/2022                                                          
+# Date last modified : 03/14/2025                                                          
 # Version            : 1.0                                                                    
 # Usage              : rosrun gem_gnss_control gem_gnss_tracker_stanley_rtk.py                                                                      
 # Python version     : 3.8   
@@ -23,7 +23,7 @@ from numpy import linalg as la
 import scipy.signal as signal
 
 from filters import OnlineFilter
-from pid_controllers import SimplePID, BaselinePID
+from pid_controllers import PID
 
 
 # ROS Headers
@@ -52,7 +52,7 @@ class Stanley(object):
         # PID for longitudinal control
         self.desired_speed = 0.6  # m/s
         self.max_accel     = 0.48 # % of acceleration
-        self.pid_speed     = SimplePID(0.5, 0.0, 0.1, wg=20)
+        self.pid_speed     = PID(0.5, 0.0, 0.1, wg=20)
         self.speed_filter  = OnlineFilter(1.2, 30, 4)
 
         self.gnss_sub   = rospy.Subscriber("/novatel/inspva", Inspva, self.inspva_callback)

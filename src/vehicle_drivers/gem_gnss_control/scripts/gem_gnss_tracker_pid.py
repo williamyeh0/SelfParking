@@ -7,7 +7,7 @@ from geometry_msgs.msg import PoseStamped
 from nav_msgs.msg import Path
 import time
 
-from pid_controllers import SimplePID, BaselinePID
+from pid_controllers import PID
 
 ###############################################################################
 # Lane Following Controller
@@ -55,8 +55,8 @@ class LaneFollowController:
         self.image_center_x = self.image_width / 2.0  # Image center x-coordinate
         
         # Initialize PID controllers
-        self.pid_speed = BaselinePID(kp=0.5, ki=0.0, kd=0.1, wg=20)  # Speed controller with windup guard
-        self.pid_steer = BaselinePID(kp=0.01, ki=0.0, kd=0.005)      # Steering controller
+        self.pid_speed = PID(kp=0.5, ki=0.0, kd=0.1, wg=20)  # Speed controller with windup guard
+        self.pid_steer = PID(kp=0.01, ki=0.0, kd=0.005)      # Steering controller
 
         ###############################################################################
         # Vehicle State Variables

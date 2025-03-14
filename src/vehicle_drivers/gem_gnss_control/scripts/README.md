@@ -42,7 +42,7 @@ The system consists of two main components:
 - Stop sign detection can be introduced using YOLOv5
 
 #### Vehicle Control
-- Implements PID controllers for both speed and steering (`BaselinePID` in `pid_controllers.py`)
+- Implements PID controllers for both speed and steering (`PID` in `pid_controllers.py`)
 - Features:
   - Adaptive steering control based on lateral error
   - Speed control with acceleration limits

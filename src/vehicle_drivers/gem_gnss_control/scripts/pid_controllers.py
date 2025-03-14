@@ -37,7 +37,7 @@ from novatel_gps_msgs.msg import NovatelPosition, NovatelXYZ, Inspva
 from pacmod_msgs.msg import PositionWithSpeed, PacmodCmd, SystemRptFloat, VehicleSpeedRpt
 
 
-class BaselinePID(object):
+class PID(object):
     """
     Generic PID controller implementation with anti-windup protection.
     
@@ -125,49 +125,4 @@ class BaselinePID(object):
         self.derror = de
 
         # Return PID control output + feedforward term
-        return fwd + self.kp * e + self.ki * self.iterm + self.kd * de
-
-
-class SimplePID(object):
-
-    def __init__(self, kp, ki, kd, wg=None):
-
-        self.iterm  = 0
-        self.last_t = None
-        self.last_e = 0
-        self.kp     = kp
-        self.ki     = ki
-        self.kd     = kd
-        self.wg     = wg
-        self.derror = 0
-
-    def reset(self):
-        self.iterm  = 0
-        self.last_e = 0
-        self.last_t = None
-
-    def get_control(self, t, e, fwd=0):
-
-        if self.last_t is None:
-            self.last_t = t
-            de = 0
-        else:
-            de = (e - self.last_e) / (t - self.last_t)
-
-        if abs(e - self.last_e) > 0.5:
-            de = 0
-
-        self.iterm += e * (t - self.last_t)
-
-        # take care of integral winding-up
-        if self.wg is not None:
-            if self.iterm > self.wg:
-                self.iterm = self.wg
-            elif self.iterm < -self.wg:
-                self.iterm = -self.wg
-
-        self.last_e = e
-        self.last_t = t
-        self.derror = de
-
         return fwd + self.kp * e + self.ki * self.iterm + self.kd * de
