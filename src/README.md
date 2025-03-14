@@ -15,6 +15,7 @@
 <a href="url"><img src="./images/GEM_Rviz2.png" width="600"></a>  
 
 #### Demo
+Note that this demo is not for lane following and does not use lane detection. Instead, the car will drive autonomously using only GNSS to follow pre-recorded waypoints (similar to the setup of MP2).
 
 $ cd ~/demo_ws/  
 $ catkin_make  
