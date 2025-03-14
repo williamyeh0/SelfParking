@@ -27,7 +27,6 @@ import scipy.signal as signal
 from cv_bridge import CvBridge, CvBridgeError
 
 from filters import OnlineFilter
-from pid_controllers import SimplePID, BaselinePID
 
 
 # ROS Headers
