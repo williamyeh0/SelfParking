@@ -75,7 +75,7 @@ The system consists of two main components:
 
 ### ROS Topics
 #### Subscribed Topics
-- `/oak/rgb/image_raw`: Camera feed
+- `/oak/rgb/image_raw`: Camera feed (note that this is the topic name on the E4; the E2 topic name is different and you will need to change this. You can easily discover the available topics in your system using `rostopic list`)
 - `/pacmod/as_tx/enable`: Vehicle enable status
 - `/pacmod/parsed_tx/vehicle_speed_rpt`: Vehicle speed
 

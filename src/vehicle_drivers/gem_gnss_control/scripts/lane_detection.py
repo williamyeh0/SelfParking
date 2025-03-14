@@ -126,6 +126,7 @@ class LaneNetDetector:
         
         # Subscribe to camera feed
         self.sub_image = rospy.Subscriber('oak/rgb/image_raw', Image, self.img_callback, queue_size=1)
+        # note that oak/rgb/image_raw is the topic name for the GEM E4. If you run this on the E2, you will need to change the topic name
         
         # Publishers for visualization and control
         self.pub_contrasted_image = rospy.Publisher("lane_detection/contrasted_image", Image, queue_size=1)
