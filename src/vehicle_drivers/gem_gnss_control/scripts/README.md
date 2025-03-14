@@ -30,7 +30,7 @@ The system utilizes two pre-trained deep learning models:
 ### System Architecture
 The system consists of two main components:
 1. Lane Detection Node (`lane_detection.py`)
-2. Vehicle Controller Node (`controller.py`)
+2. Vehicle Controller Node (`gem_gnss_tracker_pid.py`)
 
 #### Lane Detection
 - Uses a deep learning-based approach with YOLOPv2 for lane detection
@@ -42,7 +42,7 @@ The system consists of two main components:
 - Stop sign detection can be introduced using YOLOv5
 
 #### Vehicle Control
-- Implements PID controllers for both speed and steering
+- Implements PID controllers for both speed and steering (`BaselinePID` in `pid_controllers.py`)
 - Features:
   - Adaptive steering control based on lateral error
   - Speed control with acceleration limits
@@ -94,7 +94,7 @@ The system consists of two main components:
    ```
 3. Start the controller node:
    ```bash
-   python lane_follow_controller.py
+   python gem_gnss_tracker_pid.py
    ```
 
 ## Performance Considerations

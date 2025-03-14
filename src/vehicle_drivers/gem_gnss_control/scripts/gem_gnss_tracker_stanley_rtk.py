@@ -52,7 +52,7 @@ class Stanley(object):
         # PID for longitudinal control
         self.desired_speed = 0.6  # m/s
         self.max_accel     = 0.48 # % of acceleration
-        self.pid_speed     = PID(0.5, 0.0, 0.1, wg=20)
+        self.pid_speed     = SimplePID(0.5, 0.0, 0.1, wg=20)
         self.speed_filter  = OnlineFilter(1.2, 30, 4)
 
         self.gnss_sub   = rospy.Subscriber("/novatel/inspva", Inspva, self.inspva_callback)
