@@ -1,13 +1,48 @@
-import numpy as np
-import rospy
-from sensor_msgs.msg import Image
-from std_msgs.msg import Header, Bool
-from cv_bridge import CvBridge, CvBridgeError
+#!/usr/bin/env python3
+
+#================================================================
+# File name: lane_detection.py                                                                  
+# Description: learning-based lane detection module                                                            
+# Author: Siddharth Anand
+# Email: hangcui3@illinois.edu                                                                     
+# Date created: 08/02/2021                                                                
+# Date last modified: 03/14/2025
+# Version: 1.0                                                                   
+# Usage: python lane_detection.py                                                                      
+# Python version: 3.8                                                             
+#================================================================
+
+from __future__ import print_function
+
+# Python Headers
+import os 
 import cv2
-import torch
-from nav_msgs.msg import Path
-from geometry_msgs.msg import PoseStamped
+import csv
+import math
 import time
+import torch
+import numpy as np
+from numpy import linalg as la
+import scipy.signal as signal
+from cv_bridge import CvBridge, CvBridgeError
+
+from filters import OnlineFilter
+from pid_controllers import SimplePID, BaselinePID
+
+
+# ROS Headers
+import rospy
+from nav_msgs.msg import Path
+import alvinxy.alvinxy as axy # Import AlvinXY transformation module
+
+# GEM Sensor Headers
+from sensor_msgs.msg import Image
+from std_msgs.msg import String, Header, Bool, Float32, Float64
+from novatel_gps_msgs.msg import NovatelPosition, NovatelXYZ, Inspva
+
+# GEM PACMod Headers
+from geometry_msgs.msg import PoseStamped
+from pacmod_msgs.msg import PositionWithSpeed, PacmodCmd, SystemRptFloat, VehicleSpeedRpt
 
 ###############################################################################
 # Lane Detection Node

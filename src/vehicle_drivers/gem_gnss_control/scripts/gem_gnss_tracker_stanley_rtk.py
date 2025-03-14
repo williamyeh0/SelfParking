@@ -22,6 +22,10 @@ import numpy as np
 from numpy import linalg as la
 import scipy.signal as signal
 
+from filters import OnlineFilter
+from pid_controllers import SimplePID, BaselinePID
+
+
 # ROS Headers
 import rospy
 import alvinxy.alvinxy as axy 
@@ -32,70 +36,6 @@ from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
 # GEM PACMod Headers
 from pacmod_msgs.msg import PositionWithSpeed, PacmodCmd, SystemRptFloat, VehicleSpeedRpt
-
-
-class OnlineFilter(object):
-
-    def __init__(self, cutoff, fs, order):
-        
-        nyq = 0.5 * fs
-        normal_cutoff = cutoff / nyq
-
-        # Get the filter coct_errorficients 
-        self.b, self.a = signal.butter(order, normal_cutoff, btype='low', analog=False)
-
-        # Initialize
-        self.z = signal.lfilter_zi(self.b, self.a)
-    
-    def get_data(self, data):
-
-        filted, self.z = signal.lfilter(self.b, self.a, [data], zi=self.z)
-        return filted
-
-
-class PID(object):
-
-    def __init__(self, kp, ki, kd, wg=None):
-
-        self.iterm  = 0
-        self.last_t = None
-        self.last_e = 0
-        self.kp     = kp
-        self.ki     = ki
-        self.kd     = kd
-        self.wg     = wg
-        self.derror = 0
-
-    def reset(self):
-        self.iterm  = 0
-        self.last_e = 0
-        self.last_t = None
-
-    def get_control(self, t, e, fwd=0):
-
-        if self.last_t is None:
-            self.last_t = t
-            de = 0
-        else:
-            de = (e - self.last_e) / (t - self.last_t)
-
-        if abs(e - self.last_e) > 0.5:
-            de = 0
-
-        self.iterm += e * (t - self.last_t)
-
-        # take care of integral winding-up
-        if self.wg is not None:
-            if self.iterm > self.wg:
-                self.iterm = self.wg
-            elif self.iterm < -self.wg:
-                self.iterm = -self.wg
-
-        self.last_e = e
-        self.last_t = t
-        self.derror = de
-
-        return fwd + self.kp * e + self.ki * self.iterm + self.kd * de
 
 
 class Stanley(object):
