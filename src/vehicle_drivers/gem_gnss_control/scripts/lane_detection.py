@@ -4,7 +4,7 @@
 # File name: lane_detection.py                                                                  
 # Description: learning-based lane detection module                                                            
 # Author: Siddharth Anand
-# Email: hangcui3@illinois.edu                                                                     
+# Email: sanand12@illinois.edu                                                                 
 # Date created: 08/02/2021                                                                
 # Date last modified: 03/14/2025
 # Version: 1.0                                                                   
@@ -64,7 +64,7 @@ class LaneNetDetector:
     5. Visual feedback through annotated images
     """
     
-    def __init__(self):
+    def __init__(self, path_to_weights='../../../weights/yolopv2.pt'):
         """
         Initialize the lane detection node with model, parameters and ROS connections.
         
@@ -74,6 +74,9 @@ class LaneNetDetector:
         - ROS publishers and subscribers
         - Image processing parameters
         """
+        if not os.path.exists(path_to_weights):
+            raise FileNotFoundError(f"Model weights not found at {path_to_weights}")
+
         # Frame buffer for batch processing to increase efficiency
         self.frame_buffer = []
         self.buffer_size = 4  # Process 4 frames at once for better throughput
@@ -96,7 +99,7 @@ class LaneNetDetector:
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         
         # Load pre-trained YOLOPv2 model for lane detection
-        self.model = torch.jit.load('weights/yolopv2.pt')
+        self.model = torch.jit.load(path_to_weights)
         self.half = self.device != 'cpu'  # Use half precision for faster inference on GPU
         
         # Configure model for inference
