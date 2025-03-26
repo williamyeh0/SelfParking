@@ -3,7 +3,9 @@
 This starter code implements a baseline for lane detection and lane following control. 
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 The majority of the code that you will be working with in this starting code can be found at the path `e2/src/vehicle_drivers/gem_gnss_control/scripts`. The README within that specific directory is tailored for explaining the usage of the `gem_gnss_tracker_pid.py`+ `lane_detection.py` system. 
+
 $$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 You are not constrained to using a PID controller (as is done in `gem_gnss_tracker_pid.py` for lane following). We have also implemented Pure Pursuit and Stanley controllers in `gem_gnss_tracker_pp.py` and `gem_gnss_tracker_stanley_rtk.py` respectively. However, note that the Pure Pursuit and Stanley controllers do not currently support integration with the lane detection module / lane following. You would have to do some integration work (though, that should not be too hard).
