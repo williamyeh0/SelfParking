@@ -1,5 +1,5 @@
 ### Starter Code of Polaris GEM e2 for [ECE484](https://publish.illinois.edu/safe-autonomy/) and [CS588](http://luthuli.cs.uiuc.edu/~daf//courses/MAAV-22/588-2022-home.html)
-
+Note that this code is for the e2. If you are working with the e4, DO NOT use the ROS environment included at this directory level; short story is that it won't work. You can use the `demo_ws` folder in the `~` directory, for now
 #### Center for Autonomy at University of Illinois Urbana-Champaign
 
 #### Author: Hang Cui (hangcui3@illinois.edu)
