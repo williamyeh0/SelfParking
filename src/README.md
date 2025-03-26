@@ -16,6 +16,7 @@
 
 #### Demo
 Note that this demo is not for lane following and does not use lane detection. Instead, the car will drive autonomously using only GNSS to follow pre-recorded waypoints (similar to the setup of MP2).
+The demo code that DOES do lane following using lane detection is within the vehicle_drivers/gem_gnss_control/ directory.
 
 $ cd ~/demo_ws/  
 $ catkin_make  
@@ -29,7 +30,16 @@ $ roslaunch basic_launch visualization.launch
 $ source devel/setup.bash  
 $ roslaunch basic_launch dbw_joystick.launch  
 
-#### GNSS-based waypoint follower with Stanley controller and RTK enabled
+#### GNSS-based waypoints follower with Pure Pursuit controller
+
+Click the video below.  
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/8l52buLR1zU/0.jpg)](https://www.youtube.com/watch?v=8l52buLR1zU "GNSS based waypoints following using pure pursuit controller")  
+
+$ source devel/setup.bash  
+$ rosrun gem_gnss_control gem_gnss_tracker_pp.py  
+
+#### GNSS-based waypoint follower with Stanley controller and RTK enabled [potentially deprecated]
 
 Click the video below.  
 
@@ -40,15 +50,6 @@ $ roslaunch basic_launch gem_pacmod_control.launch
 
 $ source devel/setup.bash  
 $ rosrun gem_gnss_control gem_gnss_tracker_stanley_rtk.py  
-
-#### GNSS-based waypoints follower with Pure Pursuit controller
-
-Click the video below.  
-
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/8l52buLR1zU/0.jpg)](https://www.youtube.com/watch?v=8l52buLR1zU "GNSS based waypoints following using pure pursuit controller")  
-
-$ source devel/setup.bash  
-$ rosrun gem_gnss_control gem_gnss_tracker_pp.py  
 
 #### Vision based (monovision camera) lane following using Stanley controller
 
