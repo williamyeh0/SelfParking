@@ -3,14 +3,15 @@
 This starter code implements a baseline for lane detection and lane following control. 
 
 ## Do note:
+For information on e.g., what rostopics to record, software versions, hardware specs, etc. PLEASE, please look at the vehicle documentation, linked on the [course project page](https://publish.illinois.edu/safe-autonomy/resources/) and [directly in the CfA resources here](https://publish.illinois.edu/robotics-autonomy-resources/).
+
+When recording rosbags, you can change the buffer size if you get warnings about packets dropping; [read the cli](https://wiki.ros.org/rosbag/Commandline#record).
 
 The majority of the code that you will be working with in this starting code can be found at the path `e#/src/vehicle_drivers/gem_gnss_control/scripts`. The README within that specific directory is tailored for explaining the usage of the `gem_gnss_tracker_pid.py`+ `lane_detection.py` system. 
 
 If you want to use the baseline lane following, you will need to download the corresponding model weights as a `.pt` file. You can read the README.md at the directory mentioned in the line above for instruction on this. 
 
 The ROS environment for e2 vs e4 is very similar. There are just a few small differences, e.g., 4 arena (corner) cameras on e4 versus a front-left front-right only corner cameras on e2. The actual python code (not various CMake configs), is nearly identical, aside from potential some parameters about vehicle length/width, etc.
-
-
 
 You are not constrained to using a PID controller (as is done in `gem_gnss_tracker_pid.py` for lane following). We have also implemented Pure Pursuit and Stanley controllers in `gem_gnss_tracker_pp.py` and `gem_gnss_tracker_stanley_rtk.py` respectively. However, note that the Pure Pursuit and Stanley controllers do not currently support integration with the lane detection module / lane following. You would have to do some integration work (though, that should not be too hard).
 
