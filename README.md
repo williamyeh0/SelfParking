@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# SelfParking
-Self Parking
-=======
 # GEM Workspace and Starter Code
 
 This starter code implements a baseline for lane detection and lane following control. 
