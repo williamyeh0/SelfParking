@@ -86,7 +86,20 @@ The system consists of two main components:
 - `/pacmod/as_rx/accel_cmd`: Acceleration commands
 
 ## Usage
-1. Launch ROS master node
+1. Launch ROS master node:
+
+    First do this so that everytime you open a new terminal it sources:
+    ```bash
+    echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+    source ~/.bashrc
+    ```
+    
+    Launch ROS master node:
+
+    ```bash
+    roscore
+    ```
+
 
 2. Start the lane detection node:
    ```bash
